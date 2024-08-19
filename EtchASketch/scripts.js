@@ -1,8 +1,7 @@
-
-
     const container = document.querySelector('.container')
     const button = document.querySelector('button')
 function generateGrid(){
+    console.log('generateGrid')
     let fullGrid = (gridSide * gridSide)
     const dim = 100/gridSide
     
@@ -13,7 +12,7 @@ function generateGrid(){
         noteGrid.style.margin = 0;
         noteGrid.style.padding = 0;
         noteGrid.style.height = dim + 'vh';
-        noteGrid.style.width = dim + 'vw';
+        noteGrid.style.width = dim + 'vh';
         noteGrid.style.backgroundColor = 'lightgray';
         noteGrid.className = 'drawHere';
 
@@ -26,9 +25,9 @@ divs.forEach(div => {
     });
 });
 }
-    button.addEventListener('click', gridPrompt)
 
 function gridPrompt(){
+    console.log('gridPrompt')
    let input = window.prompt(`Generate new page`, `1-100`);
     input = parseInt(input);
 
@@ -49,3 +48,5 @@ function gridPromptError(){
         generateGrid();
     }
 }
+
+button.addEventListener('click', gridPrompt)

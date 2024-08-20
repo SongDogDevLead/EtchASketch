@@ -19,12 +19,21 @@ function generateGrid(){
 
         container.appendChild(noteGrid);
     }
-    divs = document.querySelectorAll('.drawHere');
+
+    const divs = document.querySelectorAll('.drawHere');
     divs.forEach(div => {
-    div.addEventListener('mouseover', function() {
-        this.style.backgroundColor = 'black';
+        div.addEventListener('mouseover', function() {
+            const hue = Math.floor(Math.random() * 361);
+            if (this.style.backgroundColor == 'lightgray'){
+                this.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+                this.style.opacity = 0.1;
+            }
+            
+            else if (parseFloat(this.style.opacity) < 1){
+                this.style.opacity = parseFloat(this.style.opacity) + 0.1;
+            }
+        });
     });
-});
 }
 
 
@@ -33,11 +42,18 @@ function generateGrid(){
 function gridPrompt(message = `Generate new page`, field = `Enter a number between 1-100`){
     
     let input = window.prompt(message, field);
+    
+    if (input === null) { // Handle if the user cancels the prompt
+        alert("Grid generation canceled");
+        return;
+    }
+
     input = parseInt(input);
 
-    if(isNaN(input)|| input < 1 || input > 100){
+    else if(isNaN(input)|| input < 1 || input > 100){
         gridPrompt('Error: Must be a valid number', 'between 1-100');
     }
+
     else {gridSide = input;
         generateGrid();
     }
@@ -47,3 +63,5 @@ function gridPrompt(message = `Generate new page`, field = `Enter a number betwe
 button.addEventListener('click', function() {
     gridPrompt(); 
 })
+
+

@@ -2,18 +2,17 @@
     const button = document.querySelector('button')
 
 function generateGrid(){
-    console.log('generateGrid')
-    let fullGrid = (gridSide * gridSide)
     const dim = 100/gridSide
-    
+    const useVH = window.innerHeight < window.innerWidth;
+    let minDim = dim + (useVH ? 'vh' : 'vw');
     container.innerHTML = '';
     
-    for (let i = 0; i < fullGrid; i++) {
+    for (let i = 0; i < (gridSide * gridSide); i++) {
         const noteGrid = document.createElement('div');
         noteGrid.style.margin = 0;
         noteGrid.style.padding = 0;
-        noteGrid.style.height = dim + 'vh';
-        noteGrid.style.width = dim + 'vh';
+        noteGrid.style.height = minDim;
+        noteGrid.style.width = minDim;
         noteGrid.style.backgroundColor = 'lightgray';
         noteGrid.className = 'drawHere';
 
